@@ -33,7 +33,7 @@ from homeassistant.core import HomeAssistant, callback
 from homeassistant.exceptions import TemplateError
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.config_validation import PLATFORM_SCHEMA
-from homeassistant.helpers.event import async_track_state_change
+from homeassistant.helpers.event import async_track_state_change_event
 from homeassistant.helpers.template import result_as_boolean
 
 # pylint: disable=wildcard-import, unused-wildcard-import
@@ -828,7 +828,7 @@ class PidController(SensorEntity):
 
             ## process listners
             for entity in self._entities:
-                async_track_state_change(self.hass, entity, sensor_state_listener)
+                async_track_state_change_event(self.hass, entity, sensor_state_listener)
 
         self.hass.bus.async_listen_once(EVENT_HOMEASSISTANT_START, sensor_startup)
 
